@@ -10,8 +10,7 @@ export default function Footer() {
         <span style={{ fontSize: '12.5px', color: 'var(--muted-2)', fontWeight: 700 }}>© 2026 Dileep Edalath</span>
         <div style={{ display: 'flex', gap: '16px' }}>
   
-          {/* LinkedIn */}
-          <a href="https://linkedin.com" target="_blank" title="LinkedIn" style={{
+          <a href="https://www.linkedin.com/in/dileep-edalath/" target="_blank" title="LinkedIn" style={{
             width: '32px', height: '32px', borderRadius: '6px',
             border: '1px solid var(--border)', display: 'flex',
             alignItems: 'center', justifyContent: 'center',
@@ -25,8 +24,7 @@ export default function Footer() {
             </svg>
           </a>
   
-          {/* GitHub */}
-          <a href="https://github.com" target="_blank" title="GitHub" style={{
+          <a href="https://github.com/edalathdileep-ship-it" target="_blank" title="GitHub" style={{
             width: '32px', height: '32px', borderRadius: '6px',
             border: '1px solid var(--border)', display: 'flex',
             alignItems: 'center', justifyContent: 'center',
