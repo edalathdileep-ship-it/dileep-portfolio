@@ -25,7 +25,7 @@ export default async function CaseStudy({
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
     <h2 style={{
-      fontWeight: 700, fontSize: 'clamp(20px,2.5vw,26px)',
+      fontWeight: 700, fontSize: 'clamp(18px,2.5vw,26px)',
       letterSpacing: '-0.025em', lineHeight: 1.25, marginBottom: '20px', color: '#fff',
     }}>{children}</h2>
   )
@@ -34,24 +34,25 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 function BodyText({ children }: { children: React.ReactNode }) {
   return (
     <p style={{
-      fontSize: '15px', color: '#a0a0a0', lineHeight: 1.8,
+      fontSize: 'clamp(14px,1.5vw,15px)', color: '#a0a0a0', lineHeight: 1.8,
       fontWeight: 300, marginBottom: '16px',
     }}>{children}</p>
   )
 }
 
 function Divider() {
-  return <div style={{ width: '100%', height: '1px', background: 'var(--border)', margin: '72px 0' }} />
+  return <div style={{ width: '100%', height: '1px', background: 'var(--border)', margin: '64px 0' }} />
 }
 
 function CaseImage({ src, alt }: { src: string; alt: string }) {
   return (
-    <div style={{ width: '100%', margin: '48px 0' }}>
+    <div style={{ width: '100%', margin: '40px 0' }}>
       <Image
         src={src}
         alt={alt}
         width={1600}
         height={1000}
+        sizes="(max-width: 768px) 100vw, 1400px"
         style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '12px' }}
       />
     </div>
@@ -61,11 +62,11 @@ function CaseImage({ src, alt }: { src: string; alt: string }) {
 function StatCard({ value, label }: { value: string; label: string }) {
   return (
     <div style={{
-      flex: 1, padding: '24px', borderRadius: '12px',
+      flex: 1, padding: 'clamp(16px,2vw,24px)', borderRadius: '12px',
       border: '1px solid var(--border)', background: '#111',
-      textAlign: 'center', minWidth: '120px',
+      textAlign: 'center', minWidth: '100px',
     }}>
-      <p style={{ fontSize: '36px', fontWeight: 800, letterSpacing: '-0.03em', color: '#fff', marginBottom: '6px' }}>{value}</p>
+      <p style={{ fontSize: 'clamp(24px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.03em', color: '#fff', marginBottom: '6px' }}>{value}</p>
       <p style={{ fontSize: '12px', color: 'var(--muted)', fontWeight: 400 }}>{label}</p>
     </div>
   )
@@ -74,7 +75,7 @@ function StatCard({ value, label }: { value: string; label: string }) {
 function InsightCard({ title, body }: { title: string; body: string }) {
   return (
     <div style={{
-      padding: '24px', borderRadius: '12px',
+      padding: 'clamp(16px,2vw,24px)', borderRadius: '12px',
       border: '1px solid var(--border)', background: '#111',
     }}>
       <p style={{ fontSize: '13px', fontWeight: 700, color: '#fff', marginBottom: '8px' }}>{title}</p>
@@ -86,11 +87,11 @@ function InsightCard({ title, body }: { title: string; body: string }) {
 function QuoteBlock({ children }: { children: React.ReactNode }) {
   return (
     <div style={{
-      margin: '32px 0', padding: '24px 28px', borderRadius: '12px',
+      margin: '32px 0', padding: 'clamp(16px,2vw,24px) clamp(16px,2vw,28px)', borderRadius: '12px',
       background: '#111', border: '1px solid var(--border)',
       borderLeft: '3px solid #00E5A0',
     }}>
-      <p style={{ fontSize: '15px', color: '#c0c0c0', lineHeight: 1.75, fontStyle: 'italic', fontWeight: 300 }}>{children}</p>
+      <p style={{ fontSize: 'clamp(13px,1.5vw,15px)', color: '#c0c0c0', lineHeight: 1.75, fontStyle: 'italic', fontWeight: 300 }}>{children}</p>
     </div>
   )
 }
@@ -99,12 +100,12 @@ function TableRow({ type, example, what }: { type: string; example: string; what
   return (
     <div style={{
       display: 'grid', gridTemplateColumns: '1fr 2fr 2fr',
-      gap: '16px', padding: '14px 16px',
+      gap: '12px', padding: '12px 16px',
       borderBottom: '1px solid var(--border)',
-      fontSize: '13px', color: '#a0a0a0',
+      fontSize: 'clamp(11px,1.2vw,13px)', color: '#a0a0a0',
     }}>
       <span style={{ color: '#fff', fontWeight: 500 }}>{type}</span>
-      <span style={{ fontFamily: 'monospace', color: '#00E5A0', fontSize: '12px' }}>{example}</span>
+      <span style={{ fontFamily: 'monospace', color: '#00E5A0', fontSize: '11px', wordBreak: 'break-all' }}>{example}</span>
       <span>{what}</span>
     </div>
   )
@@ -119,22 +120,38 @@ function Label({ text, color }: { text: string; color: string }) {
   )
 }
 
+const caseStyles = `
+  .case-main { padding: clamp(80px,10vw,120px) clamp(20px,6vw,80px); }
+  .insight-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important; }
+  .stat-row { flex-wrap: wrap; }
+  .meta-row { flex-wrap: wrap; gap: clamp(16px,3vw,48px) !important; }
+  .cta-row { flex-direction: column; gap: 16px; }
+  @media (max-width: 768px) {
+    .cta-row { flex-direction: column !important; }
+    .table-grid { grid-template-columns: 1fr 1fr !important; }
+  }
+  @media (max-width: 480px) {
+    .table-grid { grid-template-columns: 1fr !important; }
+  }
+`
+
 function DrectCaseStudy() {
   const blue = '#60a5fa'
   return (
     <PageTransition>
       <ScrollProgress color="#60a5fa" />
-      <main style={{ maxWidth: '1400px', margin: '0 auto', padding: '120px 80px 120px' }}>
+      <style>{caseStyles}</style>
+      <main className="case-main" style={{ maxWidth: '1400px', margin: '0 auto' }}>
         <Link href="/" style={{ fontSize: '13px', color: 'var(--muted)', display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '48px' }}>← Back</Link>
 
         <Label text="Case study" color={blue} />
-        <h1 style={{ fontWeight: 800, fontSize: 'clamp(28px,4vw,44px)', letterSpacing: '-0.03em', lineHeight: 1.08, marginBottom: '24px', color: '#fff' }}>
+        <h1 style={{ fontWeight: 800, fontSize: 'clamp(24px,4vw,44px)', letterSpacing: '-0.03em', lineHeight: 1.08, marginBottom: '24px', color: '#fff' }}>
           Designing certainty into a service that sends a doctor to your home when you are most vulnerable
         </h1>
         <BodyText>Drect is an on-demand doctor app in Dubai. Patients book visits during moments of urgency, not when they have time to compare options. Confidence and speed are not features here. They are prerequisites.</BodyText>
         <BodyText>I was brought in with 6 incomplete wireframes covering roughly 25% of the product. Over 30 days, I designed the remaining experience end to end, defining the interaction model, core flows, and system behavior as a solo product designer.</BodyText>
 
-        <div style={{ display: 'flex', gap: '48px', flexWrap: 'wrap', marginTop: '40px', marginBottom: '64px' }}>
+        <div className="meta-row" style={{ display: 'flex', gap: '48px', flexWrap: 'wrap', marginTop: '40px', marginBottom: '64px' }}>
           {[['Role', 'Product Designer, Solo end-to-end'], ['Timeline', '30 days'], ['Deliverable', '50+ production screens']].map(([label, val]) => (
             <div key={label}>
               <p style={{ fontSize: '11px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '6px' }}>{label}</p>
@@ -157,7 +174,7 @@ function DrectCaseStudy() {
         <Label text="Framing the problem" color={blue} />
         <SectionHeading>Before opening Figma, I spent two days mapping what was missing.</SectionHeading>
         <BodyText>Four things became clear and stayed true for every decision that followed.</BodyText>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', margin: '32px 0' }}>
+        <div className="insight-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px', margin: '32px 0' }}>
           <InsightCard title="Certainty is the product" body="Users are letting a stranger into their home while vulnerable. Doctor identity, credentials, pricing, and live tracking are not nice-to-haves." />
           <InsightCard title="Speed over choice" body="This is not a marketplace. The system picks the doctor. The experience needed to feel like Uber, not Zocdoc." />
           <InsightCard title="The map is the interface" body="Availability, assignment, tracking, arrival. The map communicates all of it. It stays dominant on every booking screen." />
@@ -195,7 +212,7 @@ function DrectCaseStudy() {
 
         <Label text="Impact" color={blue} />
         <SectionHeading>The auto-assignment model became the product core interaction.</SectionHeading>
-        <div style={{ display: 'flex', gap: '16px', margin: '32px 0', flexWrap: 'wrap' }}>
+        <div className="stat-row" style={{ display: 'flex', gap: '16px', margin: '32px 0', flexWrap: 'wrap' }}>
           <StatCard value="6" label="wireframes received" />
           <StatCard value="50+" label="production screens" />
           <StatCard value="30" label="days, solo" />
@@ -203,16 +220,16 @@ function DrectCaseStudy() {
         </div>
         <BodyText>Confidence was built into every step of the booking flow. Doctor identity, credentials, ETA, and live tracking stayed visible from assignment to arrival. 50+ screens delivered across all states including loading, empty, error, and success so development could move without ambiguity.</BodyText>
         <BodyText>The scope expanded beyond booking. Prescriptions, reports, invoices and follow-ups turned a single-use flow into a health layer that persists beyond each visit.</BodyText>
-        <div style={{ marginTop: '32px', padding: '24px', borderRadius: '12px', border: '1px solid var(--border-light)', background: '#111', borderLeft: '3px solid #60a5fa' }}>
-          <p style={{ fontSize: '14px', color: '#c0c0c0', lineHeight: 1.75, fontStyle: 'italic', fontWeight: 300 }}>
+        <div style={{ marginTop: '32px', padding: 'clamp(16px,2vw,24px)', borderRadius: '12px', border: '1px solid var(--border-light)', background: '#111', borderLeft: '3px solid #60a5fa' }}>
+          <p style={{ fontSize: 'clamp(13px,1.5vw,14px)', color: '#c0c0c0', lineHeight: 1.75, fontStyle: 'italic', fontWeight: 300 }}>
             The most valuable work was not visual. It was asking the right questions early enough that the answers could shape the product.
           </p>
         </div>
         <Divider />
 
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
+        <div className="cta-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
           <div>
-            <p style={{ fontSize: '18px', fontWeight: 700, marginBottom: '4px' }}>Liked this project?</p>
+            <p style={{ fontSize: 'clamp(16px,2vw,18px)', fontWeight: 700, marginBottom: '4px' }}>Liked this project?</p>
             <p style={{ fontSize: '14px', color: 'var(--muted)' }}>Let us work on something together.</p>
           </div>
           <Link href="/contact" className="btn-scale" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 24px', borderRadius: '8px', background: 'var(--fg)', color: 'var(--bg)', fontWeight: 600, fontSize: '14px' }}>Get in touch →</Link>
@@ -227,18 +244,19 @@ function TokkoCaseStudy() {
   return (
     <PageTransition>
       <ScrollProgress color="#00E5A0" />
-      <main style={{ maxWidth: '1400px', margin: '0 auto', padding: '120px 80px 120px' }}>
+      <style>{caseStyles}</style>
+      <main className="case-main" style={{ maxWidth: '1400px', margin: '0 auto' }}>
         <Link href="/" style={{ fontSize: '13px', color: 'var(--muted)', display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '48px' }}>← Back</Link>
 
         <Label text="Case study" color={green} />
-        <h1 style={{ fontWeight: 800, fontSize: 'clamp(28px,4vw,44px)', letterSpacing: '-0.03em', lineHeight: 1.08, marginBottom: '24px', color: '#fff' }}>
+        <h1 style={{ fontWeight: 800, fontSize: 'clamp(24px,4vw,44px)', letterSpacing: '-0.03em', lineHeight: 1.08, marginBottom: '24px', color: '#fff' }}>
           How do you compress AI prompts without losing what actually matters?
         </h1>
         <BodyText>Tokko is a prompt compression tool I designed and built from scratch, shipped as a web app, Chrome extension, and public REST API in 2 weeks.</BodyText>
         <BodyText>Post launch I acquired early users through Reddit. Adoption was fast. Retention was not. The core issue was that token savings alone did not create enough perceived value to justify a behavior change.</BodyText>
         <BodyText>This case study documents the product decisions, what I got right, and what I would do differently.</BodyText>
 
-        <div style={{ display: 'flex', gap: '48px', flexWrap: 'wrap', marginTop: '40px', marginBottom: '64px' }}>
+        <div className="meta-row" style={{ display: 'flex', gap: '48px', flexWrap: 'wrap', marginTop: '40px', marginBottom: '64px' }}>
           {[['Role', 'Product Designer, full ownership'], ['Timeline', '2 weeks'], ['Shipped', 'Web app, Chrome extension, REST API']].map(([label, val]) => (
             <div key={label}>
               <p style={{ fontSize: '11px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '6px' }}>{label}</p>
@@ -269,7 +287,7 @@ function TokkoCaseStudy() {
         <BodyText>I tested dozens of prompts and found three categories of constraints that compression consistently stripped.</BodyText>
 
         <div style={{ margin: '32px 0', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border)' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 2fr', gap: '16px', padding: '12px 16px', background: '#111', borderBottom: '1px solid var(--border)', fontSize: '11px', fontWeight: 600, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          <div className="table-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 2fr', gap: '12px', padding: '12px 16px', background: '#111', borderBottom: '1px solid var(--border)', fontSize: '11px', fontWeight: 600, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
             <span>Type</span><span>Example</span><span>What happened</span>
           </div>
           <TableRow type="URLs" example="docs.api.com/v2/ref" what="Removed or mangled" />
@@ -281,7 +299,7 @@ function TokkoCaseStudy() {
 
         <SectionHeading>The solution</SectionHeading>
         <BodyText>I built a constraint integrity layer with four deterministic steps.</BodyText>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', margin: '24px 0' }}>
+        <div className="insight-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px', margin: '24px 0' }}>
           <InsightCard title="1. Detect" body="Scan for constraints before compression runs." />
           <InsightCard title="2. Compress" body="Apply token reduction normally." />
           <InsightCard title="3. Verify" body="Check every flagged constraint survived." />
@@ -301,7 +319,7 @@ function TokkoCaseStudy() {
         <BodyText>I mapped and designed 15+ distinct states across the optimizer, analytics, history, settings, and global error boundaries.</BodyText>
 
         <div style={{ margin: '32px 0', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border)' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '16px', padding: '12px 16px', background: '#111', borderBottom: '1px solid var(--border)', fontSize: '11px', fontWeight: 600, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '12px', padding: '12px 16px', background: '#111', borderBottom: '1px solid var(--border)', fontSize: '11px', fontWeight: 600, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
             <span>State</span><span>What it handles</span>
           </div>
           {[
@@ -310,7 +328,7 @@ function TokkoCaseStudy() {
             ['Success', 'Validated, constraints preserved'],
             ['Error', 'Failed compression, API issues, constraint conflicts'],
           ].map(([state, desc]) => (
-            <div key={state} style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '16px', padding: '14px 16px', borderBottom: '1px solid var(--border)', fontSize: '13px', color: '#a0a0a0' }}>
+            <div key={state} style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '12px', padding: '12px 16px', borderBottom: '1px solid var(--border)', fontSize: '13px', color: '#a0a0a0' }}>
               <span style={{ color: '#fff', fontWeight: 500 }}>{state}</span>
               <span>{desc}</span>
             </div>
@@ -349,16 +367,16 @@ function TokkoCaseStudy() {
         <BodyText>Validate the economics before writing a line of code. A landing page, a waitlist, five conversations with API developers. The Reddit feedback I got post-launch was available pre-launch. I just did not go looking for it.</BodyText>
         <BodyText>If I continue Tokko, the pivot is clear. From make prompts shorter to make prompts better. That is a different product with a defensible value proposition.</BodyText>
 
-        <div style={{ marginTop: '32px', padding: '24px', borderRadius: '12px', border: '1px solid var(--border-light)', background: '#111', borderLeft: '3px solid #00E5A0' }}>
-          <p style={{ fontSize: '14px', color: '#c0c0c0', lineHeight: 1.75, fontStyle: 'italic', fontWeight: 300 }}>
+        <div style={{ marginTop: '32px', padding: 'clamp(16px,2vw,24px)', borderRadius: '12px', border: '1px solid var(--border-light)', background: '#111', borderLeft: '3px solid #00E5A0' }}>
+          <p style={{ fontSize: 'clamp(13px,1.5vw,14px)', color: '#c0c0c0', lineHeight: 1.75, fontStyle: 'italic', fontWeight: 300 }}>
             The design work, especially constraint integrity, solved a genuine problem. The value proposition was wrong for the mass market. I know exactly why, and exactly what I would do differently. That is not a failure. That is how products work.
           </p>
         </div>
         <Divider />
 
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
+        <div className="cta-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
           <div>
-            <p style={{ fontSize: '18px', fontWeight: 700, marginBottom: '4px' }}>Liked this project?</p>
+            <p style={{ fontSize: 'clamp(16px,2vw,18px)', fontWeight: 700, marginBottom: '4px' }}>Liked this project?</p>
             <p style={{ fontSize: '14px', color: 'var(--muted)' }}>Let us work on something together.</p>
           </div>
           <Link href="/contact" className="btn-scale" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 24px', borderRadius: '8px', background: 'var(--fg)', color: 'var(--bg)', fontWeight: 600, fontSize: '14px' }}>Get in touch →</Link>

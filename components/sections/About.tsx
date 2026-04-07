@@ -25,13 +25,13 @@ export default function About() {
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: '200px 1fr',
-        gap: '56px',
+        gridTemplateColumns: 'clamp(120px, 20vw, 200px) 1fr',
+        gap: 'clamp(24px, 4vw, 56px)',
         alignItems: 'start',
       }}>
         <FadeUp>
           <div style={{
-            width: '200px', borderRadius: '12px',
+            width: '100%', borderRadius: '12px',
             overflow: 'hidden', background: '#1a1a1a',
           }}>
             <Image
@@ -48,21 +48,13 @@ export default function About() {
         <FadeUp delay={100}>
           <div style={{
             display: 'flex', flexDirection: 'column',
-            gap: '18px', fontSize: '14.5px', lineHeight: 1.75,
+            gap: '18px', fontSize: 'clamp(13px, 1.5vw, 14.5px)', lineHeight: 1.75,
             color: '#c0c0c0', fontWeight: 300, marginBottom: '28px',
           }}>
-            <p>
-              Hi, I'm <strong style={{ color: '#fff', fontWeight: 500 }}>Dileep</strong>. A self-taught product designer from Kerala based in Bangalore. I focus on taking messy, early-stage ideas and turning them into clear, usable products.
-            </p>
-            <p>
-              I like working on things where the problem isn't fully defined yet. Where there's no playbook and you have to figure it out.
-            </p>
-            <p>
-              Recently, I've been designing and building products with AI assistants. I go from idea to a shipped, working product much faster now.
-            </p>
-            <p>
-              I care about making products feel simple without dumbing them down. Good design to me is when something just works, scales well, and solves the right problem.
-            </p>
+            <p>Hi, I am <strong style={{ color: '#fff', fontWeight: 500 }}>Dileep</strong>. A self-taught product designer from Kerala based in Bangalore. I focus on taking messy, early-stage ideas and turning them into clear, usable products.</p>
+            <p>I like working on things where the problem is not fully defined yet. Where there is no playbook and you have to figure it out.</p>
+            <p>Recently, I have been designing and building products with AI assistants. I go from idea to a shipped, working product much faster now.</p>
+            <p>I care about making products feel simple without dumbing them down. Good design to me is when something just works, scales well, and solves the right problem.</p>
           </div>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
@@ -77,6 +69,14 @@ export default function About() {
           </div>
         </FadeUp>
       </div>
+
+      <style>{`
+        @media (max-width: 600px) {
+          #about .about-responsive-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }

@@ -18,31 +18,39 @@ export default function ProjectCard({ project }: { project: Project }) {
         className="project-card"
       >
         {/* Image */}
-        <div style={{ width: '100%', height: '420px', overflow: 'hidden', position: 'relative', background: '#0d0d10' }}>
-          <div
-            style={{
-              position: 'absolute', inset: 0, zIndex: 1,
-              background: 'linear-gradient(to bottom, transparent 60%, rgba(17,17,19,0.6) 100%)',
-            }}
-          />
+        <div style={{
+          width: '100%',
+          height: 'clamp(200px, 35vw, 420px)',
+          overflow: 'hidden',
+          position: 'relative',
+          background: '#0d0d10',
+        }}>
+          <div style={{
+            position: 'absolute', inset: 0, zIndex: 1,
+            background: 'linear-gradient(to bottom, transparent 60%, rgba(17,17,19,0.6) 100%)',
+          }} />
           <Image
             src={project.thumbnail}
             alt={project.name}
             fill
-            sizes="960px"
-            style={{ objectFit: 'cover', objectPosition: 'top center', transition: 'transform 0.6s cubic-bezier(0.22,1,0.36,1)' }}
+            sizes="(max-width: 768px) 100vw, 960px"
+            style={{
+              objectFit: 'cover',
+              objectPosition: 'top center',
+              transition: 'transform 0.6s cubic-bezier(0.22,1,0.36,1)',
+            }}
             className="card-img"
           />
         </div>
 
         {/* Meta */}
-        <div style={{ padding: '20px 28px 28px', background: '#111113', borderTop: '1px solid #1e1e22' }}>
+        <div style={{ padding: 'clamp(16px, 3vw, 20px) clamp(16px, 3vw, 28px) clamp(20px, 3vw, 28px)', background: '#111113', borderTop: '1px solid #1e1e22' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
             <div>
               <div style={{ fontSize: '11px', fontWeight: 600, color: '#3a3a42', letterSpacing: '0.06em', marginBottom: '6px' }}>
                 {project.number}
               </div>
-              <span style={{ fontWeight: 700, fontSize: '22px', letterSpacing: '-0.02em' }}>{project.name}</span>
+              <span style={{ fontWeight: 700, fontSize: 'clamp(18px, 3vw, 22px)', letterSpacing: '-0.02em' }}>{project.name}</span>
             </div>
             <span
               className="card-arrow"
@@ -55,7 +63,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             >↗</span>
           </div>
 
-          <p style={{ fontSize: '13.5px', color: 'var(--muted)', lineHeight: 1.65, marginBottom: '16px', maxWidth: '600px' }}>
+          <p style={{ fontSize: 'clamp(12px, 1.5vw, 13.5px)', color: 'var(--muted)', lineHeight: 1.65, marginBottom: '16px' }}>
             {project.description}
           </p>
 
