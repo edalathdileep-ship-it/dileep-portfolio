@@ -11,12 +11,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
-  const linkStyle = {
-    fontSize: '14px',
-    color: 'var(--muted)',
-    transition: 'color 0.2s',
-  }
-
   return (
     <nav style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
@@ -32,12 +26,13 @@ export default function Navbar() {
       </Link>
 
       <ul style={{ display: 'flex', gap: '36px', listStyle: 'none' }}>
-        <li><a href="/#work" style={linkStyle}>Work</a></li>
-        <li><a href="/#about" style={linkStyle}>About</a></li>
+        <li><a href="/#work" className="nav-link" style={{ fontSize: '14px', color: 'var(--muted)', transition: 'color 0.2s' }}>Work</a></li>
+        <li><a href="/#about" className="nav-link" style={{ fontSize: '14px', color: 'var(--muted)', transition: 'color 0.2s' }}>About</a></li>
       </ul>
 
       <Link
         href="/contact"
+        className="btn-scale"
         style={{
           fontSize: '13px', fontWeight: 600,
           padding: '9px 20px', borderRadius: '8px',

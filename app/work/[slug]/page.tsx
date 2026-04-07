@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import PageTransition from '@/components/ui/PageTransition'
+import ScrollProgress from '@/components/ui/ScrollProgress'
 
 export function generateStaticParams() {
   return projects.map(p => ({ slug: p.slug }))
@@ -122,6 +123,7 @@ function DrectCaseStudy() {
   const blue = '#60a5fa'
   return (
     <PageTransition>
+      <ScrollProgress color="#60a5fa" />
       <main style={{ maxWidth: '1400px', margin: '0 auto', padding: '120px 80px 120px' }}>
         <Link href="/" style={{ fontSize: '13px', color: 'var(--muted)', display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '48px' }}>← Back</Link>
 
@@ -213,7 +215,7 @@ function DrectCaseStudy() {
             <p style={{ fontSize: '18px', fontWeight: 700, marginBottom: '4px' }}>Liked this project?</p>
             <p style={{ fontSize: '14px', color: 'var(--muted)' }}>Let us work on something together.</p>
           </div>
-          <Link href="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 24px', borderRadius: '8px', background: 'var(--fg)', color: 'var(--bg)', fontWeight: 600, fontSize: '14px' }}>Get in touch →</Link>
+          <Link href="/contact" className="btn-scale" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 24px', borderRadius: '8px', background: 'var(--fg)', color: 'var(--bg)', fontWeight: 600, fontSize: '14px' }}>Get in touch →</Link>
         </div>
       </main>
     </PageTransition>
@@ -224,6 +226,7 @@ function TokkoCaseStudy() {
   const green = '#00E5A0'
   return (
     <PageTransition>
+      <ScrollProgress color="#00E5A0" />
       <main style={{ maxWidth: '1400px', margin: '0 auto', padding: '120px 80px 120px' }}>
         <Link href="/" style={{ fontSize: '13px', color: 'var(--muted)', display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '48px' }}>← Back</Link>
 
@@ -358,7 +361,7 @@ function TokkoCaseStudy() {
             <p style={{ fontSize: '18px', fontWeight: 700, marginBottom: '4px' }}>Liked this project?</p>
             <p style={{ fontSize: '14px', color: 'var(--muted)' }}>Let us work on something together.</p>
           </div>
-          <Link href="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 24px', borderRadius: '8px', background: 'var(--fg)', color: 'var(--bg)', fontWeight: 600, fontSize: '14px' }}>Get in touch →</Link>
+          <Link href="/contact" className="btn-scale" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 24px', borderRadius: '8px', background: 'var(--fg)', color: 'var(--bg)', fontWeight: 600, fontSize: '14px' }}>Get in touch →</Link>
         </div>
       </main>
     </PageTransition>
