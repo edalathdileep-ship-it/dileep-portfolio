@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 const skills = [
   'Figma', 'Interaction Design', 'UX Research', 'React',
-  'Cursor', 'Claude', 'Vibe Designing', 'Prototyping', 'Vibe Coding',
+  'Cursor', 'Claude', 'AI Assisted Builder', 'Prototyping', 'Vibe Coding',
 ]
 
 export default function About() {
