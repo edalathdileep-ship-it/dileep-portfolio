@@ -120,6 +120,34 @@ function Label({ text, color }: { text: string; color: string }) {
   )
 }
 
+function IASection({ number, title, badge, badgeColor, items }: {
+  number: string
+  title: string
+  badge: string
+  badgeColor: string
+  items: { text: string; color: string }[]
+}) {
+  return (
+    <div style={{ padding: '16px 20px', borderRadius: '10px', border: '1px solid var(--border)', background: '#0d0d0d' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <span style={{ fontSize: '12px', fontWeight: 700, color: '#3a3a42' }}>{number}</span>
+          <span style={{ fontSize: '14px', fontWeight: 600, color: '#fff' }}>{title}</span>
+        </div>
+        <span style={{ fontSize: '10px', fontWeight: 600, padding: '3px 8px', borderRadius: '999px', border: `1px solid ${badgeColor}40`, color: badgeColor, background: `${badgeColor}10`, whiteSpace: 'nowrap' }}>{badge}</span>
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+        {items.map((item, i) => (
+          <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+            <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: item.color, flexShrink: 0, marginTop: '5px' }} />
+            <span style={{ fontSize: '13px', color: '#888', lineHeight: 1.5 }}>{item.text}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 const caseStyles = `
   .case-main { padding: clamp(80px,10vw,120px) clamp(20px,6vw,80px); }
   .insight-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important; }
@@ -182,6 +210,98 @@ function DrectCaseStudy() {
         </div>
         <Divider />
 
+        <Label text="Structuring the product" color={blue} />
+        <SectionHeading>The wireframes arrived without an information architecture. No screen inventory, no flow logic, no edge case coverage.</SectionHeading>
+        <BodyText>Before designing anything, I mapped the complete product structure from scratch. The exercise had three outputs: what already existed in the wireframes, what I needed to design from the ground up, and what edge cases the product required to function in the real world. That map became the source of truth for every screen that followed.</BodyText>
+
+        <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', margin: '24px 0 32px' }}>
+          {[['#555', 'Existed in wireframes'], ['#60a5fa', 'Designed from scratch'], ['#f59e0b', 'Edge case / error state']].map(([color, label]) => (
+            <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: color, flexShrink: 0 }} />
+              <span style={{ fontSize: '12px', color: 'var(--muted)' }}>{label}</span>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '40px' }}>
+          <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#555', marginTop: '8px' }}>Entry Point</p>
+
+          <IASection number="01" title="Onboarding" badge="wireframes" badgeColor="#555" items={[
+            { text: 'Welcome carousel (3 slides)', color: '#555' },
+            { text: 'Login / Register selection', color: '#555' },
+            { text: 'Phone number input (UAE +971)', color: '#555' },
+            { text: 'Phone input states — empty, filled, error', color: '#60a5fa' },
+            { text: 'OTP verification (4 digit)', color: '#555' },
+            { text: 'OTP states — partial, error, resend timer', color: '#60a5fa' },
+          ]} />
+
+          <IASection number="02" title="Location permission" badge="I designed" badgeColor="#60a5fa" items={[
+            { text: 'Custom permission prompt', color: '#60a5fa' },
+            { text: '"Enter location manually" fallback', color: '#60a5fa' },
+            { text: 'Location denied — manual entry required', color: '#f59e0b' },
+            { text: 'Not available in your area', color: '#f59e0b' },
+          ]} />
+
+          <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#555', marginTop: '8px' }}>Bottom Tab — Home (Tab 1)</p>
+
+          <IASection number="03" title="Home screen" badge="wireframes" badgeColor="#555" items={[
+            { text: 'Map with nearby doctor pins', color: '#555' },
+            { text: 'Location dropdown with change option', color: '#555' },
+            { text: 'Time selector — "Now" or schedule later', color: '#60a5fa' },
+            { text: 'Category tabs — General, Pediatric, Physio', color: '#555' },
+            { text: 'Service card with price, symptoms, age', color: '#60a5fa' },
+            { text: '"Book Doctor" primary CTA', color: '#555' },
+          ]} />
+
+          <IASection number="04" title="Booking flow" badge="wireframes" badgeColor="#555" items={[
+            { text: 'Confirm details (first time vs returning)', color: '#60a5fa' },
+            { text: 'Add patient info (name, age, gender)', color: '#60a5fa' },
+            { text: 'Add address sub flow (flat, building, type)', color: '#60a5fa' },
+            { text: '"Assigning shortly..." animation', color: '#60a5fa' },
+            { text: 'Doctor assigned — photo, credentials, ETA', color: '#60a5fa' },
+            { text: 'Real time tracking on map', color: '#60a5fa' },
+            { text: '"Doctor reached home" confirmation', color: '#60a5fa' },
+            { text: 'Long doctor name truncation', color: '#f59e0b' },
+          ]} />
+
+          <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#555', marginTop: '8px' }}>Bottom Tab — Profile (Tab 2)</p>
+
+          <IASection number="05" title="Profile screen" badge="wireframes" badgeColor="#555" items={[
+            { text: 'User card, addresses, patients, reports', color: '#555' },
+            { text: 'Booking list with status badges', color: '#60a5fa' },
+            { text: 'Empty state — "No bookings yet"', color: '#60a5fa' },
+            { text: 'Visit header, doctor info, rating', color: '#60a5fa' },
+            { text: 'Price breakdown, invoice download', color: '#60a5fa' },
+            { text: "Doctor's notes, medications, lab tests", color: '#60a5fa' },
+          ]} />
+
+          <IASection number="06" title="Doctor profile" badge="I designed" badgeColor="#60a5fa" items={[
+            { text: 'Photo, specialization, stats, reviews', color: '#60a5fa' },
+          ]} />
+
+          <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#555', marginTop: '8px' }}>System States (Global)</p>
+
+          <IASection number="07" title="Error and edge case screens" badge="I designed" badgeColor="#60a5fa" items={[
+            { text: 'Server error + "Retry"', color: '#f59e0b' },
+            { text: 'Not serviceable + "Change location"', color: '#f59e0b' },
+            { text: 'Skeleton loading state', color: '#f59e0b' },
+            { text: 'Empty bookings illustration', color: '#f59e0b' },
+            { text: 'Input validation errors', color: '#f59e0b' },
+            { text: 'Long name truncation', color: '#f59e0b' },
+          ]} />
+        </div>
+
+        <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap', padding: '24px', borderRadius: '12px', border: '1px solid var(--border)', background: '#111', marginBottom: '40px' }}>
+          {[['50+', 'Total screens'], ['12 (24%)', 'From wireframes'], ['38 (76%)', 'Designed from scratch'], ['6+', 'Edge cases']].map(([val, label]) => (
+            <div key={label}>
+              <p style={{ fontSize: '20px', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', marginBottom: '4px' }}>{val}</p>
+              <p style={{ fontSize: '12px', color: 'var(--muted)' }}>{label}</p>
+            </div>
+          ))}
+        </div>
+
+        <Divider />
+
         <Label text="Home screen" color={blue} />
         <SectionHeading>Balancing speed with decision confidence</SectionHeading>
         <BodyText>The core insight was to separate selection from evaluation. Users need enough context to choose a speciality, not enough to comparison shop.</BodyText>
@@ -195,6 +315,19 @@ function DrectCaseStudy() {
         <BodyText>I designed six screens to resolve that uncertainty progressively. Confirmation adapts for first-time and returning users. The assigning state makes the system visible. Doctor assignment surfaces identity, credentials, and ETA immediately. Live tracking returns control to the user. Arrival confirmation closes the loop.</BodyText>
         <BodyText>Each screen is the answer to a specific anxiety, in the order those anxieties occur.</BodyText>
         <CaseImage src="/drect-booking-flow.png" alt="Core booking flow screens" />
+
+        <div style={{ width: '100%', margin: '40px 0', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border)', background: '#0d0d0d' }}>
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{ width: '100%', height: 'auto', display: 'block' }}
+          >
+            <source src="/drect-prototype.mp4" type="video/mp4" />
+          </video>
+        </div>
+
         <Divider />
 
         <Label text="Before and after" color={blue} />
