@@ -57,7 +57,11 @@ export default function Hero() {
         animation: 'fadeUp 0.7s 0.1s ease both',
         position: 'relative', zIndex: 1,
       }}>
-        Designer who ships.
+        Product Designer{' '}
+        <em style={{ fontFamily: 'var(--font-playfair), serif', fontStyle: 'italic', fontWeight: 400 }}>
+          who
+        </em>{' '}
+        ships.
       </h1>
 
       <p style={{
